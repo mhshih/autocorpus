@@ -8,9 +8,10 @@ def append2DRH(dep,rel,head,DRH):
     elif rel not in DRH[dep]:DRH[dep][rel]=[head]
     else:DRH[dep][rel].append(head)
 
-def parse(file):
+from os import chdir,system
+def parse(file='chinese-onesent-utf8.txt'):
     chdir('/tmp/stanford-parser-full-2016-10-31')
-    system('bash lexparser.sh data/chinese-onesent-utf8.txt > lexparser.parsed')
+    system('bash lexparser.sh data/'+file+' > lexparser.parsed')
     DRH=dict() #DRH[dep]={rel:heads}
     for line in open('lexparser.parsed').readlines()[:-1]:
         rel,dep_head=line.split('(')[:2]
@@ -18,14 +19,17 @@ def parse(file):
         append2DRH(dep,rel,head,DRH)
     return DRH
 
-from os import chdir,system
 from django.http import HttpResponse
+from django.shortcuts import render
 def home(request):
-    DRH=parse(file='')
-    output='<table>'
-    for dep,rel_heads in DRH.items():
-        output+='<tr><td>%s</td></tr>' % dep
-        for rel,heads in rel_heads.items():
-            output+='<tr><td></td><td>%s:</td><td>%s</td><tr>' % (rel,' '.join(heads))
-    return HttpResponse(output)
+    if request.method=='GET':
+        return render(request,'template.htm',{'form':UploadFileForm()})
+    elif request.method=='POST':
+        DRH=parse(file=request.FILES['file'].name)
+        output='<table>'
+        for dep,rel_heads in DRH.items():
+            output+='<tr><td>%s</td></tr>' % dep
+            for rel,heads in rel_heads.items():
+                output+='<tr><td></td><td>%s:</td><td>%s</td><tr>' % (rel,' '.join(heads))
+        return HttpResponse(output)
 
