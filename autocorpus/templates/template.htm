@@ -1,5 +1,14 @@
+upload_form
 <form action=/ method=POST enctype=multipart/form-data>
 {% csrf_token %}
-{{ form }}<br>
+{{ upload_form }}<br>
 <input type=submit />
 </form>
+
+query
+<form action=/query method=POST>
+  {% csrf_token %}
+  <input type=radio name=radio value={{corpora.0}} />{{corpora.0}}
+  <input type=submit />
+</form>
+
