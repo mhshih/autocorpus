@@ -5,10 +5,10 @@ upload_form
 <input type=submit />
 </form>
 
-query
 <form action=/query method=POST>
   {% csrf_token %}
-  <input type=radio name=radio value={{corpora.0}} />{{corpora.0}}
+  query word: <input name=word />
+  corpus: <input type=radio name=radio value={{corpora.0}} />{{corpora.0}}
   <input type=submit />
 </form>
 

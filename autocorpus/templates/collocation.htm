@@ -1,0 +1,10 @@
+<table>
+{% for relation,heads in RH.items %}
+    <tr><td>{{ relation }}</td></tr>
+    <tr><td></td>
+    {% for head in heads %}
+        <td>{{ head }}</td>
+    {% endfor %}
+    </tr>
+{% endfor %}
+</table>
