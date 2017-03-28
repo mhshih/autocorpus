@@ -8,7 +8,7 @@ from django.shortcuts import render
 def query(request):
     corpus=request.POST['radio']
     DRH=read_parse(corpus)
-    dependent=request.POST['word']
+    dependent=request.POST['word'].encode('utf8')
 #   return HttpResponse(DRH[dependent].values()[0])
     return render(request,'collocation.htm',{'RH':DRH[dependent]})
 
