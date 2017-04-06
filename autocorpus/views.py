@@ -9,8 +9,7 @@ def query(request):
     corpus=request.POST['radio']
     DRH=read_parse(corpus)
     dependent=request.POST['word'].encode('utf8')
-#   return HttpResponse(DRH[dependent].values()[0])
-    return render(request,'collocation.htm',{'RH':DRH[dependent]})
+    return render(request,'collocation.htm',{'word':dependent,'RH':DRH[dependent]})
 
 def write_RF(RF):
     f=open(RF.name,'wb+')

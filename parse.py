@@ -6,8 +6,7 @@ def append2DRH(dep,rel,head,DRH):
     else:DRH[dep][rel].append(head)
 
 def parse(filename):#='chinese-onesent-utf8.txt'):
-    command='cd /home/simon/stanford-parser-full-2016-10-31; java -mx150m -cp "*:" edu.stanford.nlp.parser.lexparser.LexicalizedParser -outputFormat "typedDependencies" edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz /tmp/autocorpus/%s > /tmp/autocorpus/%s.out' % (filename,filename)
-    command='cd /home/simon/stanford-parser-full-2016-10-31; java -mx150m -cp "*:" edu.stanford.nlp.parser.lexparser.LexicalizedParser -outputFormat "typedDependencies" edu/stanford/nlp/models/lexparser/chinesePCFG.ser.gz /tmp/autocorpus/%s > /tmp/autocorpus/%s.out' % (filename,filename)
+    command='cd /home/simon/stanford-parser-full-2016-10-31; java -mx999m -cp "*:" edu.stanford.nlp.parser.lexparser.LexicalizedParser -outputFormat "typedDependencies" edu/stanford/nlp/models/lexparser/chinesePCFG.ser.gz /tmp/autocorpus/%s > /tmp/autocorpus/%s.out' % (filename,filename)
     system(command)
 
 def read_parse(filename):
