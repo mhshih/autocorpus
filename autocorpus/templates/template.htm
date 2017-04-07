@@ -1,4 +1,4 @@
-upload_form (0.89 sents/sec)
+upload_format: .txt .segment .parsed .conll (0.89 sents/sec)
 <form action=/ method=POST enctype=multipart/form-data>
 {% csrf_token %}
 {{ upload_form }}<br>
@@ -10,7 +10,7 @@ upload_form (0.89 sents/sec)
   query word: <input name=word /><br>
   corpus:<br>
   {% for corpus in corpora %}
-    <input type=radio name=radio value={{corpus}} />{{corpus}}<br>
+  <input type=radio name=radio value={{corpus}} /><a href=static/{{corpus}}>{{corpus}}</a><br>
   {% endfor %}
   <input type=submit />
 </form>
